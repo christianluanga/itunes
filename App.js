@@ -2,6 +2,7 @@
  * This is the main entry file for the application server
  */
 const express = require("express")
+const path = require("path")
 const helmet = require("helmet")
 const morgan = require("morgan")
 const app = express()
@@ -19,6 +20,14 @@ topMedia(app)
 bestOfMedia(app)
 searchMedia(app)
 
+//Serve static asests
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"))
+
+  app.get("*", (req, res) => {
+    res.sendfile(path.resolve(__dirname, "frontend", "build", "index.js"))
+  })
+}
 /*Create a PORT var and assign it the value from the .env 
 file or the constant 3500 if no port number is found in 
 the .emv file and set the App to listen on that port*/
