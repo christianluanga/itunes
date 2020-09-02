@@ -4,7 +4,6 @@
 const express = require("express")
 const path = require("path")
 const helmet = require("helmet")
-const morgan = require("morgan")
 const app = express()
 
 /*Require all the different routes from  */
@@ -13,7 +12,6 @@ const bestOfMedia = require("./routes/best.of.media")
 const searchMedia = require("./routes/search.media")
 
 app.use(helmet())
-app.use(morgan("dev"))
 
 //Execute the Routes functions
 topMedia(app)
